@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ElectronicSpreadsheet.MainPage"
+             Title=""
+             BackgroundColor="#121212">
+
+    <ContentPage.MenuBarItems>
+        <MenuBarItem Text="Файл">
+            <MenuFlyoutItem Text="Зберегти" Clicked="SaveButton_Clicked"/>
+            <MenuFlyoutItem Text="Завантажити" Clicked="LoadButton_Clicked"/>
+            <MenuFlyoutSeparator/>
+            <MenuFlyoutItem Text="Вийти" Clicked="ExitButton_Clicked"/>
+        </MenuBarItem>
+        <MenuBarItem Text="Таблиця">
+            <MenuFlyoutItem Text="Додати рядок (+ Рядок)" Clicked="AddRowButton_Clicked"/>
+            <MenuFlyoutItem Text="Видалити рядок (- Рядок)" Clicked="DeleteRowButton_Clicked"/>
+            <MenuFlyoutItem Text="Додати стовпчик (+ Стовпчик)" Clicked="AddColumnButton_Clicked"/>
+            <MenuFlyoutItem Text="Видалити стовпчик (- Стовпчик)" Clicked="DeleteColumnButton_Clicked"/>
+        </MenuBarItem>
+        <MenuBarItem Text="Довідка">
+            <MenuFlyoutItem Text="Допомога користувачу" Clicked="HelpButton_Clicked"/>
+            <MenuFlyoutItem Text="Про програму" Clicked="AboutButton_Clicked"/>
+        </MenuBarItem>
+    </ContentPage.MenuBarItems>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *" Padding="20,10,20,20" RowSpacing="12">
+
+        <Label Grid.Row="0"
+               Text="Електронна таблиця"
+               FontSize="26"
+               FontAttributes="Bold"
+               TextColor="#9FA8DA"/>
+
+        <HorizontalStackLayout Grid.Row="1" Spacing="10" VerticalOptions="Center">
+            <Label x:Name="lblSelectedCell"
+                   Text=""
+                   IsVisible="False"
+                   VerticalOptions="Center"
+                   FontAttributes="Bold"
+                   FontSize="16"
+                   TextColor="White"/>
+            <VerticalStackLayout Spacing="0" VerticalOptions="Center">
+                <Entry x:Name="txtFormula"
+                       WidthRequest="320"
+                       Placeholder="Введіть число або формулу"
+                       PlaceholderColor="#777777"
+                       TextColor="White"
+                       BackgroundColor="#1E1E1E"
+                       TextChanged="FormulaEntry_TextChanged"
+                       Completed="FormulaEntry_Completed"
+                       Unfocused="FormulaEntry_Unfocused"/>
+                <BoxView HeightRequest="2" Color="#29B6F6" WidthRequest="320"/>
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
+
+        <Grid Grid.Row="2" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+            <ScrollView Grid.Column="0" Orientation="Horizontal">
+                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                    <Button x:Name="btnAddRow"
+                            Text="+ Рядок"
+                            BackgroundColor="#B39DDB"
+                            TextColor="#121212"
+                            FontAttributes="Bold"
+                            Clicked="AddRowButton_Clicked"/>
+                    <Button x:Name="btnDeleteRow"
+                            Text="- Рядок"
+                            BackgroundColor="#B39DDB"
+                            TextColor="#121212"
+                            FontAttributes="Bold"
+                            Clicked="DeleteRowButton_Clicked"/>
+                    <Button x:Name="btnAddCol"
+                            Text="+ Стовпчик"
+                            BackgroundColor="#B39DDB"
+                            TextColor="#121212"
+                            FontAttributes="Bold"
+                            Clicked="AddColumnButton_Clicked"/>
+                    <Button x:Name="btnDeleteCol"
+                            Text="- Стовпчик"
+                            BackgroundColor="#B39DDB"
+                            TextColor="#121212"
+                            FontAttributes="Bold"
+                            Clicked="DeleteColumnButton_Clicked"/>
+                    <Button x:Name="btnSave"
+                            Text="Зберегти"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            Clicked="SaveButton_Clicked"/>
+                    <Button x:Name="btnLoad"
+                            Text="Завантажити"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            Clicked="LoadButton_Clicked"/>
+
+                    <HorizontalStackLayout Spacing="6" VerticalOptions="Center" Margin="10,0,0,0">
+                        <Label Text="Показувати формули:" VerticalOptions="Center" TextColor="White"/>
+                        <Switch x:Name="switchShowFormulas"
+                                MinimumWidthRequest="0"
+                                WidthRequest="45"
+                                VerticalOptions="Center"
+                                OnColor="#B39DDB"
+                                Toggled="ShowFormulasSwitch_Toggled"/>
+                        <Label x:Name="lblSwitchState" Text="Off" VerticalOptions="Center" TextColor="White"/>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+            </ScrollView>
+
+            <HorizontalStackLayout Grid.Column="1" Spacing="8" VerticalOptions="Center">
+                <Button x:Name="btnAbout"
+                        Text="Про програму"
+                        BackgroundColor="#455A64"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="AboutButton_Clicked"/>
+                <Button x:Name="btnHelp"
+                        Text="Довідка"
+                        BackgroundColor="#FF9800"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="HelpButton_Clicked"/>
+                <Button x:Name="btnExit"
+                        Text="Вийти"
+                        BackgroundColor="#D32F2F"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        Clicked="ExitButton_Clicked"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <ScrollView Grid.Row="3" Orientation="Both">
+            <Grid x:Name="gridTable"
+                  RowSpacing="1"
+                  ColumnSpacing="1"
+                  BackgroundColor="#333333"
+                  HorizontalOptions="Start"
+                  VerticalOptions="Start"/>
+        </ScrollView>
+
+    </Grid>
+</ContentPage>
