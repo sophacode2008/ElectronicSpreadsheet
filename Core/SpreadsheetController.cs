@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Microsoft.Maui.Storage;
 using ElectronicSpreadsheet.Models;
 using ElectronicSpreadsheet.Services;
+using Cell = ElectronicSpreadsheet.Models.Cell;
 
 namespace ElectronicSpreadsheet.Core
 {
